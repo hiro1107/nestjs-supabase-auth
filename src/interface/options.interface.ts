@@ -1,5 +1,5 @@
 import { SupabaseClientOptions } from "@supabase/supabase-js";
-import { JwtFromRequestFunction } from 'passport-jwt';
+import { JwtFromRequestFunction } from "passport-jwt";
 
 export interface SupabaseAuthStrategyOptions {
   supabaseUrl: string;

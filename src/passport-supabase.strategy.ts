@@ -1,8 +1,12 @@
-import { JwtFromRequestFunction } from 'passport-jwt';
+import { JwtFromRequestFunction } from "passport-jwt";
 import { Strategy } from "passport-strategy";
-import { createClient, SupabaseClient, SupabaseClientOptions } from '@supabase/supabase-js';
-import { UNAUTHORIZED, SUPABASE_AUTH } from './constants';
-import { SupabaseAuthUser } from './user.type';
+import {
+  createClient,
+  SupabaseClient,
+  SupabaseClientOptions,
+} from "@supabase/supabase-js";
+import { UNAUTHORIZED, SUPABASE_AUTH } from "./constants";
+import { SupabaseAuthUser } from "./user.type";
 
 interface SupabaseAuthStrategyOptions {
   supabaseUrl: string;
@@ -18,18 +22,18 @@ export class SupabaseAuthStrategyBase extends Strategy {
   success: (user: any, info: any) => void;
   fail: (challenge: string, status: number) => void;
 
-  constructor(
-    options: SupabaseAuthStrategyOptions
-  ) {
+  constructor(options: SupabaseAuthStrategyOptions) {
     super();
     if (!options.extractor) {
-      throw new Error('\n Extractor is not a function. You should provide an extractor. \n Read the docs: https://github.com/tfarras/nestjs-firebase-auth#readme');
+      throw new Error(
+        "\n Extractor is not a function. You should provide an extractor. \n Read the docs: https://github.com/tfarras/nestjs-firebase-auth#readme"
+      );
     }
 
     this.supabase = createClient(
-      options.supabaseUrl, 
-      options.supabaseKey, 
-      options.supabaseOptions = {}
+      options.supabaseUrl,
+      options.supabaseKey,
+      (options.supabaseOptions = {})
     );
     this.extractor = options.extractor;
   }
@@ -45,8 +49,9 @@ export class SupabaseAuthStrategyBase extends Strategy {
       this.fail(UNAUTHORIZED, 401);
       return;
     }
-    
-    this.supabase.auth.api.getUser(idToken)
+
+    this.supabase.auth.api
+      .getUser(idToken)
       .then((res) => this.validateSupabaseResponse(res))
       .catch((err) => {
         this.fail(err.message, 401);
