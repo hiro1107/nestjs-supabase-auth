@@ -2,7 +2,8 @@
   "name": "nestjs-supabase-auth",
   "version": "1.0.0",
   "description": "NestJS Passport Strategy for Supabase Auth",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start:dev": "tsc -w",
     "build": "tsc",
