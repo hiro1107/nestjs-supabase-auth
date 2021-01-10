@@ -8,7 +8,7 @@ import { UNAUTHORIZED, SUPABASE_AUTH } from "./constants";
 import { SupabaseAuthUser } from "./user.type";
 import { SupabaseAuthStrategyOptions } from "./interface/options.interface";
 
-export class SupabaseAuthStrategyBase extends Strategy {
+export class SupabaseAuthStrategy extends Strategy {
   readonly name = SUPABASE_AUTH;
   private supabase: SupabaseClient;
   private extractor: JwtFromRequestFunction;
