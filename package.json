@@ -4,7 +4,6 @@
   "description": "NestJS Passport Strategy for Supabase Auth",
   "main": "dist/index.js",
   "readmeFilename": "README.md",
-  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
     "*.md"

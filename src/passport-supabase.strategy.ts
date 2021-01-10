@@ -3,17 +3,10 @@ import { Strategy } from "passport-strategy";
 import {
   createClient,
   SupabaseClient,
-  SupabaseClientOptions,
 } from "@supabase/supabase-js";
 import { UNAUTHORIZED, SUPABASE_AUTH } from "./constants";
 import { SupabaseAuthUser } from "./user.type";
-
-interface SupabaseAuthStrategyOptions {
-  supabaseUrl: string;
-  supabaseKey: string;
-  supabaseOptions: SupabaseClientOptions;
-  extractor: JwtFromRequestFunction;
-}
+import { SupabaseAuthStrategyOptions } from "./interface/options.interface";
 
 export class SupabaseAuthStrategyBase extends Strategy {
   readonly name = SUPABASE_AUTH;
