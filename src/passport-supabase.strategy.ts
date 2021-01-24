@@ -1,5 +1,7 @@
+import { Request } from "express";
 import { JwtFromRequestFunction } from "passport-jwt";
 import { Strategy } from "passport-strategy";
+
 import {
   createClient,
   SupabaseClient,
@@ -13,7 +15,8 @@ export class SupabaseAuthStrategy extends Strategy {
   private supabase: SupabaseClient;
   private extractor: JwtFromRequestFunction;
   success: (user: any, info: any) => void;
-  fail: (challenge: string, status: number) => void;
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  fail: Strategy["fail"]
 
   constructor(options: SupabaseAuthStrategyOptions) {
     super();
