@@ -55,8 +55,9 @@ export class SupabaseAuthStrategy extends Strategy {
   }
 
   private async validateSupabaseResponse({ data }: any) {
-    if (data) {
-      this.success(data, {});
+    const result = await this.validate(data);
+    if (result) {
+      this.success(result, {});
       return;
     }
     this.fail(UNAUTHORIZED, 401);
