@@ -13,7 +13,7 @@ npm install --save-dev @types/passport-jwt
 Using yarn:
 ```
 yarn add passport passport-jwt @nestjs/passport
-yarn add -D --save-dev @types/passport-jwt
+yarn add -D @types/passport-jwt
 ```
 
 ### Install strategy
