@@ -32,7 +32,7 @@ yarn add nestjs-supabase-auth
 
 ### Extends the strategy to create your own strategy
 
-In this example, I'm passing supabase related optioons through dotenv and evn-cmd package. 
+In this example, I'm passing supabase related options through dotenv and [env-cmd](https://github.com/toddbluhm/env-cmd) package. 
 
 ```ts
 import { Injectable } from '@nestjs/common';
