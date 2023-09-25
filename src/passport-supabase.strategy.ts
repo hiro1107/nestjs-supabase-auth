@@ -6,9 +6,9 @@ import {
   createClient,
   SupabaseClient,
 } from "@supabase/supabase-js";
-import { UNAUTHORIZED, SUPABASE_AUTH } from "./constants";
-import { SupabaseAuthUser } from "./user.type";
+import { SUPABASE_AUTH, UNAUTHORIZED } from "./constants";
 import { SupabaseAuthStrategyOptions } from "./interface/options.interface";
+import { SupabaseAuthUser } from "./user.type";
 
 export class SupabaseAuthStrategy extends Strategy {
   readonly name = SUPABASE_AUTH;
@@ -34,8 +34,16 @@ export class SupabaseAuthStrategy extends Strategy {
     this.extractor = options.extractor;
   }
 
-  async validate(payload: SupabaseAuthUser): Promise<SupabaseAuthUser> {
-    return payload;
+  async validate(payload: SupabaseAuthUser): Promise<SupabaseAuthUser | null> {
+    if (!!payload) {
+      this.success(payload, {});
+
+      return payload;
+    }
+
+    this.fail(UNAUTHORIZED, 401);
+
+    return null;
   }
 
   authenticate(req: Request): void {
@@ -46,21 +54,11 @@ export class SupabaseAuthStrategy extends Strategy {
       return;
     }
 
-    this.supabase.auth.api
+    this.supabase.auth
       .getUser(idToken)
-      .then((res) => this.validateSupabaseResponse(res))
+      .then(({ data: { user }}) => this.validate(user))
       .catch((err) => {
         this.fail(err.message, 401);
       });
-  }
-
-  private async validateSupabaseResponse({ data }: any) {
-    const result = await this.validate(data);
-    if (result) {
-      this.success(result, {});
-      return;
-    }
-    this.fail(UNAUTHORIZED, 401);
-    return;
   }
 }
