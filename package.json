@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/hiro1107/nestjs-supabase-auth",
   "devDependencies": {
-    "@supabase/supabase-js": "^1.1.4",
+    "@supabase/supabase-js": "^2.36.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.20",
     "@types/passport-strategy": "^0.2.35",
